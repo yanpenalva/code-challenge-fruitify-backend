@@ -1,22 +1,23 @@
 # Laravel + Inertia.js + Vue 3 — Contacts CRUD
 
-## ✅ Goal
+## ✅ Main Objectives
 
--   Backend: All tests pass with **Laravel 11**.
--   Frontend: Contacts CRUD with **Inertia.js**, **Vue 3**, **TailwindCSS**.
--   Database: Local SQLite.
-
----
+- Pass **all tests** with **Laravel 11**.
+- Implement a **complete CRUD** for contacts using **Inertia.js**, **Vue 3**, and **TailwindCSS**.
+- Use **SQLite** local database for easy setup.
+- Implement **pagination** (10 per page).
+- Handle **validation** and **error display** properly.
+- Provide a **full Dockerized setup** for easy local run.
 
 ## 🚀 How to run the project
 
 1. **Clone the repository**
 
-    ```bash
+     ```bash
     git clone https://github.com/yanpenalva/code-challenge-fruitify-backend
     ```
 
-    Then navigate to the project directory:
+   Then navigate to the project directory:
 
     ```bash
     cd code-challenge-fruitify-backend
@@ -24,59 +25,54 @@
 
 2. **Install PHP dependencies**
 
-    ```bash
-    composer install
-    ```
+   ```bash
+   composer install
+   ```
 
-3. **Copy `.env`**
+3. **Copy the `.env`**
 
-    ```bash
-    cp .env.example .env
-    php artisan key:generate
-    ```
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
 4. **Create the SQLite database**
 
-    ```bash
-    touch database/database.sqlite
-    chmod 666 database/database.sqlite
-    ```
+   ```bash
+   touch database/database.sqlite
+   chmod 775 database/database.sqlite
+   ```
 
-    > ⚠️ **Permission:** The SQLite file **must be writable**.
-    > If you see `readonly database` → run:
-    >
-    > ```bash
-    > chmod 666 database/database.sqlite
-    > ```
-    >
-    > Or just run:
-
-    ```bash
-    ./permissions.sh
-    ```
+   > ⚠️ **Permissions:** The SQLite file must be writable.
+   > If you see `attempt to write a readonly database`:
+   >
+   > ```bash
+   > chmod 775 database/database.sqlite
+   > ```
 
 5. **Run migrations**
 
-    ```bash
-    php artisan migrate
-    ```
+   ```bash
+   php artisan migrate
+   ```
 
-6. **Install and build frontend**
+6. **Install frontend dependencies and build**
 
-    ```bash
-    npm install
-    npm run build
-    ```
+   ```bash
+   npm install
+   npm run build
+   ```
 
-7. **Start Docker**
+7. **Run with Docker**
 
-    ```bash
-    docker-compose up --build
-    ```
+   Make sure you have **Docker** installed and running.
 
-    Then access: [http://localhost:8001](http://localhost:8001)
+   ```bash
+   docker compose up -d
+   ```
 
----
+   This will spin up the complete environment.
+   Then access: [http://localhost:8001/contacts](http://localhost:8001/contacts)
 
 ## 🧪 How to run tests
 
@@ -84,40 +80,35 @@
 php artisan test
 ```
 
-> ✔️ For CI/production:
->
-> ```bash
-> npm run build
-> php artisan test
-> ```
+## ✅ Routes available
+
+- `GET /contacts` — List contacts (paginated)
+- `POST /contacts` — Create contact
+- `PUT /contacts/{contact}` — Update contact
+- `DELETE /contacts/{contact}` — Delete contact
+
+## 📌 Notes
+
+- **Pagination** works 10 by 10 with page navigation.
+- Validation errors are properly displayed on modals.
+- CRUD flow tested end-to-end.
+
+## 🧩 Decision Note
+
+The project keeps **Laravel standards** and clean patterns for maintainability. No unnecessary layers were added since the scope is small, but I have full experience with:
+
+- **DDD**
+- **Clean Architecture**
+- **Service/Repository patterns**
+- **Actions**, **Event Listeners**, **Pipelines**
+- **SOLID**, **DRY**, **KISS**
+
+All main goals of the test were **100% accomplished**.
+
+## 📆 Deadline
+
+✅ Everything delivered within the deadline: **July 7, 2025 23:59**.
 
 ---
 
-## 📌 Common issues
-
-**Error:** `attempt to write a readonly database`
-✅ Solution:
-
-```bash
-chmod 666 database/database.sqlite
-```
-
-If permission problems persist:
-
-```bash
-./permissions.sh
-```
-
----
-
-## 📚 Fix summary
-
--   Refactored `ContactController` to use **Inertia**.
--   Added `app.blade.php` as Inertia layout.
--   Tests switched to `assertInertia`.
--   Session driver uses SQLite.
--   Proper file permissions enforced to avoid `readonly` failures.
-
----
-
-**Ready. 100% passing.**
+**Ready for review.**
