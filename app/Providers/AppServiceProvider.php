@@ -24,7 +24,6 @@ class AppServiceProvider extends ServiceProvider {
 
         Model::preventLazyLoading(!app()->isProduction());
         Model::shouldBeStrict();
-        Model::automaticallyEagerLoadRelationships();
         Vite::useAggressivePrefetching();
         Vite::useCacheBusting();
     }
