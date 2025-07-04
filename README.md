@@ -105,10 +105,3 @@ The project keeps **Laravel standards** and clean patterns for maintainability. 
 
 All main goals of the test were **100% accomplished**.
 
-## 📆 Deadline
-
-✅ Everything delivered within the deadline: **July 7, 2025 23:59**.
-
----
-
-**Ready for review.**
