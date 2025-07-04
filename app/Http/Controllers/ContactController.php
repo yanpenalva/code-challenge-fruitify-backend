@@ -7,7 +7,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ContactsRequest;
 use App\Models\Contact;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
+
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
 
@@ -28,17 +28,19 @@ final class ContactController extends Controller {
         return redirect()->route('contacts.index');
     }
 
-    public function update(ContactsRequest $request, Contact $contact): RedirectResponse {
+    public function update(ContactsRequest $request, int $id): RedirectResponse {
+        $contact = Contact::findOrFail($id);
+
         $data = $request->validated();
         $data['phone'] = preg_replace('/\D/', '', $data['phone']);
         $contact->update($data);
 
         return redirect()->route('contacts.index');
     }
-
-    public function destroy(Contact $contact): Response {
+    public function destroy(int $id): RedirectResponse {
+        $contact = Contact::findOrFail($id);
         $contact->delete();
 
-        return response()->noContent();
+        return redirect()->route('contacts.index');
     }
 }

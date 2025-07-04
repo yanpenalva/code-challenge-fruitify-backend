@@ -52,26 +52,26 @@ export function useContacts() {
         });
     };
 
-    const update = () => {
+    const update = (close) => {
         updateForm.put(`/contacts/${updateForm.id}`, {
             preserveScroll: true,
             onSuccess: () => {
                 updateForm.reset();
                 updateForm.clearErrors();
                 selected.value = null;
+                close(); 
             },
             onError: (errors) => console.error(errors),
         });
     };
 
-    const destroy = (close) => {
+    const destroy = (onSuccessCallback) => {
         if (!selected.value) return;
 
         destroyForm.delete(`/contacts/${selected.value.id}`, {
             preserveScroll: true,
             onSuccess: () => {
-                selected.value = null;
-                close();
+                onSuccessCallback();
             },
             onError: (errors) => console.error(errors),
         });

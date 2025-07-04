@@ -6,7 +6,16 @@ import { useContacts } from "@/composables/useContacts";
 import { ref } from "vue";
 
 const props = defineProps(["contacts"]);
-const { form, selected, open, create, update, destroy } = useContacts();
+const {
+    createForm,
+    updateForm,
+    destroyForm,
+    selected,
+    open,
+    create,
+    update,
+    destroy,
+} = useContacts();
 
 const showCreate = ref(false);
 const showEdit = ref(false);
@@ -28,6 +37,16 @@ const openDelete = (contact) => {
 const closeCreate = () => (showCreate.value = false);
 const closeEdit = () => (showEdit.value = false);
 const closeDelete = () => (showDelete.value = false);
+
+const removeContact = () => {
+    const index = props.contacts.data.findIndex(
+        (c) => c.id === selected.value.id
+    );
+    if (index !== -1) props.contacts.data.splice(index, 1);
+
+    selected.value = null;
+    closeDelete();
+};
 </script>
 
 <template>
@@ -120,20 +139,22 @@ const closeDelete = () => (showDelete.value = false);
         <CreateContactModal
             :show="showCreate"
             :close="closeCreate"
-            :form="form"
+            :form="createForm"
             :create="create"
         />
+
         <EditContactModal
             :show="showEdit"
             :close="closeEdit"
-            :form="form"
+            :form="updateForm"
             :update="update"
         />
+
         <DeleteContactModal
             :show="showDelete"
             :close="closeDelete"
             :selected="selected"
-            :destroy="destroy"
+            :destroy="() => destroy(removeContact)"
         />
     </div>
 </template>
