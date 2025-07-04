@@ -1,18 +1,123 @@
-Objective:
+# Laravel + Inertia.js + Vue 3 — Contacts CRUD
 
-Back-end Assessment: [ ] Make all tests pass, applying the best practices of Laravel and SOLID and clean arch
+## ✅ Goal
 
-Front-end Assessment: [ ] Implement a front-end using Inertia.js, Vue3 and TailwindCss for contact CRUD
+-   Backend: All tests pass with **Laravel 11**.
+-   Frontend: Contacts CRUD with **Inertia.js**, **Vue 3**, **TailwindCSS**.
+-   Database: Local SQLite.
 
-* Plus: Feel free to implement improvements and more features as you wish, such as sending an email to the contact when that contact is deleted from the system.
+---
 
-# Installation
-1. Clone the repository
-2. Have PHP 8.3 installed on your machine, composer 2, and activate the extensions requested by composer when running "composer install"
-3. Run "Composer install"
-4. Create a .env file and paste the contents of .env.example
-5. Run the command php artisan key:generate
-6. Run the command php artisan test, solve the tests
+## 🚀 How to run the project
 
-7. After the test is complete, create a repository on github, and upload your resolution to the repository
-8. Send the repository link to WhatsApp +55 41 98702-5814
+1. **Clone the repository**
+
+    ```bash
+    git clone https://github.com/yanpenalva/code-challenge-fruitify-backend
+    ```
+
+    Then navigate to the project directory:
+
+    ```bash
+    cd code-challenge-fruitify-backend
+    ```
+
+2. **Install PHP dependencies**
+
+    ```bash
+    composer install
+    ```
+
+3. **Copy `.env`**
+
+    ```bash
+    cp .env.example .env
+    php artisan key:generate
+    ```
+
+4. **Create the SQLite database**
+
+    ```bash
+    touch database/database.sqlite
+    chmod 666 database/database.sqlite
+    ```
+
+    > ⚠️ **Permission:** The SQLite file **must be writable**.
+    > If you see `readonly database` → run:
+    >
+    > ```bash
+    > chmod 666 database/database.sqlite
+    > ```
+    >
+    > Or just run:
+
+    ```bash
+    ./permissions.sh
+    ```
+
+5. **Run migrations**
+
+    ```bash
+    php artisan migrate
+    ```
+
+6. **Install and build frontend**
+
+    ```bash
+    npm install
+    npm run build
+    ```
+
+7. **Start Docker**
+
+    ```bash
+    docker-compose up --build
+    ```
+
+    Then access: [http://localhost:8001](http://localhost:8001)
+
+---
+
+## 🧪 How to run tests
+
+```bash
+php artisan test
+```
+
+> ✔️ For CI/production:
+>
+> ```bash
+> npm run build
+> php artisan test
+> ```
+
+---
+
+## 📌 Common issues
+
+**Error:** `attempt to write a readonly database`
+✅ Solution:
+
+```bash
+chmod 666 database/database.sqlite
+```
+
+If permission problems persist:
+
+```bash
+./permissions.sh
+```
+
+---
+
+## 📚 Fix summary
+
+-   Refactored `ContactController` to use **Inertia**.
+-   Added `app.blade.php` as Inertia layout.
+-   Tests switched to `assertInertia`.
+-   Session driver uses SQLite.
+-   Proper file permissions enforced to avoid `readonly` failures.
+
+---
+
+**Ready. 100% passing.**

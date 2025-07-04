@@ -1,0 +1,10 @@
+services:
+  app:
+    build: .
+    container_name: fruity-app
+    ports:
+      - '8001:80'
+      - '3000:3000'
+      - '5174:5174'
+    volumes:
+      - ./:/var/www
